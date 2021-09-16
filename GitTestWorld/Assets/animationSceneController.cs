@@ -17,9 +17,12 @@ public class animationSceneController : MonoBehaviour
     {
         bool isWalking = animator.GetBool("isWalking");
         bool isRunning = animator.GetBool("isRunning");
-        bool walkPressed = Input.GetKey("w");
+        bool wPressed = Input.GetKey("w");
+        bool aPressed = Input.GetKey("a");
+        bool sPressed = Input.GetKey("s");
+        bool dPressed = Input.GetKey("d");
         bool runPressed = Input.GetKey("left shift");
-        if(!isWalking && walkPressed ) {
+        if(!isWalking && (wPressed || aPressed || sPressed || dPressed) ) {
             animator.SetBool("isWalking", true);
             animator.SetBool("isRunning", false);
         }
@@ -30,7 +33,7 @@ public class animationSceneController : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
         }
-        if (!walkPressed) {
+        if (!(wPressed || aPressed || sPressed || dPressed)) {
             animator.SetBool("isWalking", false);
             animator.SetBool("isRunning", false);
         }

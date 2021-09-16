@@ -5,16 +5,16 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -1437223564310770781
-    second: Armature|0Tpose
+    second: 00Tpose
   - first:
       74: 1309485825762003394
-    second: Armature|IdlePlayer
+    second: TestIdle
   - first:
       74: 1464139470476760089
-    second: Armature|RunPlayer
+    second: FinalRun
   - first:
       74: -8100679479915414212
-    second: Armature|WalkPlayer
+    second: FinalWalk
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -44,7 +44,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|0Tpose
+      name: 00Tpose
       takeName: Armature|0Tpose
       internalID: 0
       firstFrame: 0
@@ -73,7 +73,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|IdlePlayer
+      name: TestIdle
       takeName: Armature|IdlePlayer
       internalID: 0
       firstFrame: 1
@@ -85,7 +85,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -102,7 +102,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|RunPlayer
+      name: FinalRun
       takeName: Armature|RunPlayer
       internalID: 0
       firstFrame: 1
@@ -131,7 +131,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|WalkPlayer
+      name: FinalWalk
       takeName: Armature|WalkPlayer
       internalID: 0
       firstFrame: 1

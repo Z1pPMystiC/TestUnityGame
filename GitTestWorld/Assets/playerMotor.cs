@@ -7,10 +7,15 @@ public class playerMotor : MonoBehaviour
 
     private Vector3 PlayerMovementInput;
     private Vector3 PlayerMouseInput;
+    private float xRot;
+    private float Speed;
 
+    [SerializeField] private LayerMask FloorMask;
+    [SerializeField] private Transform FeetTransform;
     [SerializeField] private Transform PlayerCamera;
     [SerializeField] private Rigidbody PlayerBody;
-    [SerializeField] private float Speed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
     [SerializeField] private float Sensitivity;
     [SerializeField] private float JumpForce;
 
@@ -26,16 +31,34 @@ public class playerMotor : MonoBehaviour
 
     void Move()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Speed = sprintSpeed;
+        }
+        else
+        {
+            Speed = walkSpeed;
+        }
+
         Vector3 MoveVector = transform.TransformDirection(PlayerMovementInput) * Speed;
         PlayerBody.velocity = new Vector3(MoveVector.x, PlayerBody.velocity.y, MoveVector.z);
+      
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            PlayerBody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            if (Physics.CheckSphere(FeetTransform.position, 0.1f, FloorMask)) 
+            {
+                PlayerBody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            }
         }
+
     }
 
-    void MovePlayerCamera() { 
-    
+    void MovePlayerCamera() {
+
+        xRot -= PlayerMouseInput.y * Sensitivity;
+
+        transform.Rotate(0f, PlayerMouseInput.x * Sensitivity, 0f);
+        PlayerCamera.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
     }
 }
