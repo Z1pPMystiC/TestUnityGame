@@ -12121,6 +12121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameFountain
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63b38c9b5ad58a44e8f3c3c6abc6a3ec, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63b38c9b5ad58a44e8f3c3c6abc6a3ec, type: 3}
 --- !u!1001 &1930680633
