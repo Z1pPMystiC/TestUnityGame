@@ -11,6 +11,8 @@ public class RobotMotion : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
+    public Animator animator;
+
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -18,6 +20,11 @@ public class RobotMotion : MonoBehaviour
     //States
     public float attackRange;
     public bool playerInAttackRange;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Awake()
     {
@@ -36,6 +43,8 @@ public class RobotMotion : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        animator.SetBool("isRunning", true);
+        animator.SetBool("isAttacking", false);
     }
 
     private void AttackPlayer() {
@@ -43,11 +52,8 @@ public class RobotMotion : MonoBehaviour
 
         transform.LookAt(player);
 
-        if(!alreadyAttacked)
-        {
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
+        animator.SetBool("isRunning", false);
+        animator.SetBool("isAttacking", true);
     }
 
     private void ResetAttack()
