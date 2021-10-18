@@ -10,7 +10,7 @@ public class WaveSpawner : MonoBehaviour
     [System.Serializable]
     public class Wave {
         public string name;
-        public Transform enemy;
+        public GameObject enemy;
         public int count;
         public float rate;
 
@@ -23,6 +23,9 @@ public class WaveSpawner : MonoBehaviour
     public float waveCountdown;
 
     private float searchCountdown = 1f;
+
+    [SerializeField] public Transform spawnPoint;
+    [SerializeField] public HealthBarScript healthBar;
 
     public SpawnState state = SpawnState.COUNTING;
     private void Start()
@@ -54,6 +57,7 @@ public class WaveSpawner : MonoBehaviour
         {
             waveCountdown -= Time.deltaTime;
         }
+           
     }
 
     bool EnemyIsAlive()
@@ -72,7 +76,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave(Wave _wave)
     {
-        Debug.Log("Spawning Wvae: " + _wave.name);
+        Debug.Log("Spawning Wave: " + _wave.name);
         state = SpawnState.SPAWNING;
 
         for (int i = 0; i < _wave.count; i++)
@@ -86,9 +90,9 @@ public class WaveSpawner : MonoBehaviour
         yield break;
     }
 
-    void SpawnEnemy(Transform _enemy)
+    void SpawnEnemy(GameObject _enemy)
     {
-        Instantiate(_enemy, transform.position, transform.rotation);
+        Instantiate(_enemy, spawnPoint.transform.position, spawnPoint.transform.rotation);
         Debug.Log("Spawning Enemy: " + _enemy.name);
     }
 }

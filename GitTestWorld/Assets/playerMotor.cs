@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class playerMotor : MonoBehaviour
-{
-
+{ 
+    
     private Vector3 PlayerMovementInput;
     private Vector3 PlayerMouseInput;
     private float xRot;
@@ -27,6 +27,7 @@ public class playerMotor : MonoBehaviour
 
         Move();
         MovePlayerCamera();
+
     }
 
     void Move()

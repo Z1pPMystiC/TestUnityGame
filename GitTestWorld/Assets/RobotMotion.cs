@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,9 +10,15 @@ public class RobotMotion : MonoBehaviour
 
     public Transform player;
 
+    public GameObject playerBody;
+
     public LayerMask whatIsGround, whatIsPlayer;
 
     public Animator animator;
+
+    public HealthBarScript healthBar;
+
+    public int currentHealth;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -24,6 +31,7 @@ public class RobotMotion : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        currentHealth = 100;
     }
 
     private void Awake()
@@ -38,6 +46,11 @@ public class RobotMotion : MonoBehaviour
 
         if (!playerInAttackRange) ChasePlayer();
         if (playerInAttackRange) AttackPlayer();
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            DestroyEnemy();
+        }
     }
 
     private void ChasePlayer()
@@ -52,8 +65,17 @@ public class RobotMotion : MonoBehaviour
 
         transform.LookAt(player);
 
+        
         animator.SetBool("isRunning", false);
         animator.SetBool("isAttacking", true);
+
+        if (!alreadyAttacked)
+        {
+            healthBar.TakeDamage(2);
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
     }
 
     private void ResetAttack()
@@ -61,5 +83,8 @@ public class RobotMotion : MonoBehaviour
         alreadyAttacked = false;
     }
 
-
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
 }
