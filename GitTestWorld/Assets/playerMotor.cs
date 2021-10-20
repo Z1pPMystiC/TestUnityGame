@@ -62,4 +62,6 @@ public class playerMotor : MonoBehaviour
         transform.Rotate(0f, PlayerMouseInput.x * Sensitivity, 0f);
         PlayerCamera.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
     }
+
+    
 }

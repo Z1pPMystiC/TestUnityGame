@@ -10,6 +10,8 @@ public class animationSceneController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

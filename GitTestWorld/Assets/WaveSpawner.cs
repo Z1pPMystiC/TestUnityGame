@@ -39,7 +39,7 @@ public class WaveSpawner : MonoBehaviour
         {
             if (!EnemyIsAlive()) {
                 // Begin a new round
-                Debug.Log("Wave completed");
+                WaveCompleted();
             }
             else
             {
@@ -57,17 +57,34 @@ public class WaveSpawner : MonoBehaviour
         {
             waveCountdown -= Time.deltaTime;
         }
-           
+
     }
 
+    void WaveCompleted() 
+    {
+        Debug.Log("Wave Completed!");
+
+        state = SpawnState.COUNTING;
+        waveCountdown = timeBetweenWaves;
+
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            nextWave = 0;
+            Debug.Log("Completed All Waves. Looping...");
+        }
+
+        nextWave++;
+    }
     bool EnemyIsAlive()
     {
         searchCountdown -= Time.deltaTime;
         if (searchCountdown <= 0f)
         {
             searchCountdown = 1f;
-            if (GameObject.FindGameObjectsWithTag("Enemy") == null)
+            Debug.Log("Search Complete");
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
+                Debug.Log("enemies are gone");
                 return false;
             }
         }
@@ -92,7 +109,9 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy(GameObject _enemy)
     {
-        Instantiate(_enemy, spawnPoint.transform.position, spawnPoint.transform.rotation);
+
+        GameObject gameClone = Instantiate(_enemy, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        gameClone.tag = "Enemy";
         Debug.Log("Spawning Enemy: " + _enemy.name);
     }
 }

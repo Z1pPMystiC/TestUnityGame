@@ -16,9 +16,13 @@ public class RobotMotion : MonoBehaviour
 
     public Animator animator;
 
+    public int currentHealth;
+
     public HealthBarScript healthBar;
 
-    public int currentHealth;
+    public int playerDamage;
+
+    public Rigidbody rigidBody;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -32,6 +36,7 @@ public class RobotMotion : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         currentHealth = 100;
+        rigidBody.freezeRotation = true;
     }
 
     private void Awake()
@@ -45,11 +50,23 @@ public class RobotMotion : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange) AttackPlayer();
+        if (playerInAttackRange)
+        {
+            AttackPlayer();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                AttackEnemy(playerDamage);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            DestroyEnemy();
+            DestroyEnemies();
+        }
+
+        if(healthBar.IsDead())
+        {
+            DestroyEnemies();
         }
     }
 
@@ -83,8 +100,28 @@ public class RobotMotion : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void DestroyEnemy()
+    public void DestroyEnemies()
     {
-        Destroy(gameObject);
+        foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            Destroy(enemy);
+        }
+        
+    }
+
+    public void SetCurrentHealth(int health)
+    {
+        currentHealth = health;
+    }
+
+    public void AttackEnemy(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+            currentHealth = 100;
+        }
     }
 }
