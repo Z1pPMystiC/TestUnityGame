@@ -13,19 +13,21 @@ public class WaveSpawner : MonoBehaviour
         public GameObject enemy;
         public int count;
         public float rate;
-
+        public int currentHealth;
     }
 
     public Wave[] waves;
     private int nextWave = 0;
 
     public float timeBetweenWaves = 5f;
-    public float waveCountdown;
+    private float waveCountdown;
 
     private float searchCountdown = 1f;
 
-    [SerializeField] public Transform spawnPoint;
+    public Transform[] spawnPoints;
+
     [SerializeField] public HealthBarScript healthBar;
+    [SerializeField] public RobotMotion robot;
 
     public SpawnState state = SpawnState.COUNTING;
     private void Start()
@@ -38,8 +40,15 @@ public class WaveSpawner : MonoBehaviour
         if (state == SpawnState.WAITING)
         {
             if (!EnemyIsAlive()) {
-                // Begin a new round
-                WaveCompleted();
+                if (!healthBar.IsDead())
+                {
+                    WaveCompleted();
+                }
+                else
+                {
+                    state = SpawnState.WAITING;
+                }
+                
             }
             else
             {
@@ -72,8 +81,11 @@ public class WaveSpawner : MonoBehaviour
             nextWave = 0;
             Debug.Log("Completed All Waves. Looping...");
         }
-
-        nextWave++;
+        else
+        {
+            nextWave++;
+        }
+        
     }
     bool EnemyIsAlive()
     {
@@ -81,10 +93,8 @@ public class WaveSpawner : MonoBehaviour
         if (searchCountdown <= 0f)
         {
             searchCountdown = 1f;
-            Debug.Log("Search Complete");
             if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
-                Debug.Log("enemies are gone");
                 return false;
             }
         }
@@ -98,7 +108,7 @@ public class WaveSpawner : MonoBehaviour
 
         for (int i = 0; i < _wave.count; i++)
         {
-            SpawnEnemy(_wave.enemy);
+            SpawnEnemy(_wave.enemy, _wave.currentHealth);
             yield return new WaitForSeconds(1f / _wave.rate);
         }
 
@@ -107,11 +117,12 @@ public class WaveSpawner : MonoBehaviour
         yield break;
     }
 
-    void SpawnEnemy(GameObject _enemy)
+    void SpawnEnemy(GameObject _enemy, int health)
     {
-
-        GameObject gameClone = Instantiate(_enemy, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        GameObject gameClone = Instantiate(_enemy, _sp.transform.position, _sp.transform.rotation);
         gameClone.tag = "Enemy";
+        gameClone.GetComponent<RobotMotion>().SetCurrentHealth(health);
         Debug.Log("Spawning Enemy: " + _enemy.name);
     }
 }

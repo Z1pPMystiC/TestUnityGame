@@ -22,8 +22,6 @@ public class RobotMotion : MonoBehaviour
 
     public int playerDamage;
 
-    public Rigidbody rigidBody;
-
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -36,7 +34,6 @@ public class RobotMotion : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         currentHealth = 100;
-        rigidBody.freezeRotation = true;
     }
 
     private void Awake()
@@ -121,7 +118,6 @@ public class RobotMotion : MonoBehaviour
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
-            currentHealth = 100;
         }
     }
 }

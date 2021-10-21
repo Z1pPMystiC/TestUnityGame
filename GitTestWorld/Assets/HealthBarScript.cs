@@ -3,15 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarScript : RobotMotion
+public class HealthBarScript : MonoBehaviour
 {
 
     public Slider slider;
     public bool isDead = false;
+    private float respawnCountdown = 1f;
 
     
     [SerializeField] public Transform respawnPoint;
+    [SerializeField] public Transform player;
 
+    private void Update()
+    {
+        respawnCountdown -= Time.deltaTime;
+        if (respawnCountdown <= 0)
+        {
+            respawnCountdown = 1f;
+            isDead = false;
+        }
+    }
     public void SetMaxHealth(int health)
     {
         slider.maxValue = health;
@@ -41,7 +52,7 @@ public class HealthBarScript : RobotMotion
         {
             isDead = true;
             SetMaxHealth(100);
-            RespawnPlayer(player, respawnPoint);
+            RespawnPlayer(player, respawnPoint);           
         }
     }
 
