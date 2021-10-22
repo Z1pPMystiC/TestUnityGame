@@ -23,7 +23,16 @@ ModelImporter:
     second: IdleRobots2
   - first:
       74: 6466867224945856907
-    second: RunRobots2
+    second: RedRun
+  - first:
+      74: -4395932339682120007
+    second: 0RedRobotT
+  - first:
+      74: -3718879414198619375
+    second: RedAttack
+  - first:
+      74: 7737585801548793282
+    second: RedIdle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -53,7 +62,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 0RobotTpose2
+      name: 0RedRobotT
       takeName: Armature|0Tpose
       internalID: 0
       firstFrame: 0
@@ -82,7 +91,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: AttackRobots2
+      name: RedAttack
       takeName: Armature|AttackRobots
       internalID: 0
       firstFrame: 1
@@ -111,7 +120,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: IdleRobots2
+      name: RedIdle
       takeName: Armature|IdleRobots
       internalID: 0
       firstFrame: 1
@@ -140,7 +149,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: RunRobots2
+      name: RedRun
       takeName: Armature|RunRobots
       internalID: 0
       firstFrame: 1

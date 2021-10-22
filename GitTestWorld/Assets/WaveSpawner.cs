@@ -10,7 +10,7 @@ public class WaveSpawner : MonoBehaviour
     [System.Serializable]
     public class Wave {
         public string name;
-        public GameObject enemy;
+        public GameObject[] enemies;
         public int count;
         public float rate;
         public int currentHealth;
@@ -108,7 +108,8 @@ public class WaveSpawner : MonoBehaviour
 
         for (int i = 0; i < _wave.count; i++)
         {
-            SpawnEnemy(_wave.enemy, _wave.currentHealth);
+            GameObject _en = _wave.enemies[Random.Range(0, _wave.enemies.Length)];
+            SpawnEnemy(_en, _wave.currentHealth);
             yield return new WaitForSeconds(1f / _wave.rate);
         }
 
