@@ -22,6 +22,8 @@ public class RobotMotion : MonoBehaviour
 
     public int playerDamage;
 
+    public float attackDelay = 1f;
+
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -50,7 +52,7 @@ public class RobotMotion : MonoBehaviour
         if (playerInAttackRange)
         {
             AttackPlayer();
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey("mouse 0"))
             {
                 AttackEnemy(playerDamage);
             }
