@@ -9,6 +9,7 @@ public class playerMotor : MonoBehaviour
     private Vector3 PlayerMouseInput;
     private float xRot;
     private float Speed;
+    public float attackDelayCurrent;
 
     [SerializeField] private LayerMask FloorMask;
     [SerializeField] private Transform FeetTransform;
@@ -18,8 +19,16 @@ public class playerMotor : MonoBehaviour
     [SerializeField] private float sprintSpeed;
     [SerializeField] private float Sensitivity;
     [SerializeField] private float JumpForce;
+    [SerializeField] private float attackDelay;
+    [SerializeField] public Animator anim;
+    
 
     // Update is called once per frame
+
+    private void Start()
+    {
+        attackDelayCurrent = attackDelay;
+    }
     void Update()
     {
         PlayerMovementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
@@ -28,6 +37,17 @@ public class playerMotor : MonoBehaviour
         Move();
         MovePlayerCamera();
 
+        
+        attackDelayCurrent -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Mouse0) && attackDelayCurrent <= 0)
+        {
+            attackDelayCurrent = attackDelay;
+            anim.SetBool("isAttacking", true);
+        }
+        else
+        {
+            anim.SetBool("isAttacking", false);
+        }
     }
 
     void Move()

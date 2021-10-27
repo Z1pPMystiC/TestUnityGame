@@ -4039,6 +4039,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 686830436582284036, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
   m_PrefabInstance: {fileID: 686830437136766933}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &414730278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 686830436582284035, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
+  m_PrefabInstance: {fileID: 686830437136766933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414730275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4588dd60e3084bf48844ced86ae37a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &414730279 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 686830436582284039, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
@@ -7686,48 +7697,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3860e091f79bd40926983c6dc1bd28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &696731430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!95 &696731431 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1349057711552574692, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
+  m_PrefabInstance: {fileID: 686830437136766933}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 696731426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad4d0cebd9c3a2644a1a5f92db9f3715, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waves:
-  - name: FirstRound
-    enemies:
-    - {fileID: 1974913341}
-    count: 2
-    rate: 1
-    currentHealth: 100
-  - name: SecondRound
-    enemies:
-    - {fileID: 1974913341}
-    - {fileID: 919132148549274747}
-    count: 3
-    rate: 1
-    currentHealth: 100
-  - name: LastRound
-    enemies:
-    - {fileID: 1974913341}
-    - {fileID: 919132148549274747}
-    - {fileID: 2829193456454676261}
-    count: 5
-    rate: 1
-    currentHealth: 100
-  timeBetweenWaves: 5
-  spawnPoints:
-  - {fileID: 363817872}
-  - {fileID: 1725350542}
-  - {fileID: 610739326}
-  healthBar: {fileID: 105714430}
-  robot: {fileID: 0}
-  state: 2
 --- !u!1001 &699429829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21112,16 +21086,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1974913345}
     - target: {fileID: 7799838014241380961, guid: 9174fd1e6a18d9641ac45926e3c3b08c, type: 3}
+      propertyPath: attackDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799838014241380961, guid: 9174fd1e6a18d9641ac45926e3c3b08c, type: 3}
       propertyPath: attackRange
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7799838014241380961, guid: 9174fd1e6a18d9641ac45926e3c3b08c, type: 3}
+      propertyPath: playerMotor
+      value: 
+      objectReference: {fileID: 414730278}
     - target: {fileID: 7799838014241380961, guid: 9174fd1e6a18d9641ac45926e3c3b08c, type: 3}
       propertyPath: playerDamage
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7799838014241380961, guid: 9174fd1e6a18d9641ac45926e3c3b08c, type: 3}
+      propertyPath: currentHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799838014241380961, guid: 9174fd1e6a18d9641ac45926e3c3b08c, type: 3}
       propertyPath: timeBetweenAttacks
-      value: 0.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7799838014241380962, guid: 9174fd1e6a18d9641ac45926e3c3b08c, type: 3}
       propertyPath: m_Acceleration
@@ -24253,6 +24239,22 @@ PrefabInstance:
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 26242597}
+    - target: {fileID: 686830436582284035, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 696731431}
+    - target: {fileID: 686830436582284035, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
+      propertyPath: robot
+      value: 
+      objectReference: {fileID: 1974913343}
+    - target: {fileID: 686830436582284035, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
+      propertyPath: attackDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 686830436582284035, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
+      propertyPath: playerDamage
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 686830436582284036, guid: b5b79c532256a0f468b696b4772f9079, type: 3}
       propertyPath: m_Name
       value: PlayerObject
@@ -24464,6 +24466,22 @@ PrefabInstance:
       propertyPath: playerBody
       value: 
       objectReference: {fileID: 414730275}
+    - target: {fileID: 1582634028453925923, guid: 7a5d23bfdb7f9f747b1e66f8cfd6af2d, type: 3}
+      propertyPath: attackDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582634028453925923, guid: 7a5d23bfdb7f9f747b1e66f8cfd6af2d, type: 3}
+      propertyPath: playerMotor
+      value: 
+      objectReference: {fileID: 414730278}
+    - target: {fileID: 1582634028453925923, guid: 7a5d23bfdb7f9f747b1e66f8cfd6af2d, type: 3}
+      propertyPath: currentHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582634028453925923, guid: 7a5d23bfdb7f9f747b1e66f8cfd6af2d, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1817145903840766325, guid: 7a5d23bfdb7f9f747b1e66f8cfd6af2d, type: 3}
       propertyPath: m_Name
       value: HeadBlueRobot
@@ -24530,6 +24548,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeadGreenRobot
       objectReference: {fileID: 0}
+    - target: {fileID: 2080834068053777499, guid: 21bec078b327fe8489b797a89ee597c5, type: 3}
+      propertyPath: m_TagString
+      value: HeadEnemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3161043696295206774, guid: 21bec078b327fe8489b797a89ee597c5, type: 3}
       propertyPath: player
       value: 
@@ -24542,5 +24564,21 @@ PrefabInstance:
       propertyPath: playerBody
       value: 
       objectReference: {fileID: 414730275}
+    - target: {fileID: 3161043696295206774, guid: 21bec078b327fe8489b797a89ee597c5, type: 3}
+      propertyPath: attackDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161043696295206774, guid: 21bec078b327fe8489b797a89ee597c5, type: 3}
+      propertyPath: playerMotor
+      value: 
+      objectReference: {fileID: 414730278}
+    - target: {fileID: 3161043696295206774, guid: 21bec078b327fe8489b797a89ee597c5, type: 3}
+      propertyPath: currentHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161043696295206774, guid: 21bec078b327fe8489b797a89ee597c5, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21bec078b327fe8489b797a89ee597c5, type: 3}

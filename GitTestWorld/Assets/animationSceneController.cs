@@ -41,16 +41,13 @@ public class animationSceneController : MonoBehaviour
             animator.SetBool("isWalking", false);
             animator.SetBool("isRunning", false);
         }
-        if(!isAttacking && mouse0Pressed)
+        /*if(!isAttacking && mouse0Pressed)
         {
             animator.SetBool("isAttacking", true);
         }
-        if (isAttacking && !mouse0Pressed) {
+        if (isAttacking && !mouse0Pressed) 
+        {
             animator.SetBool("isAttacking", false);
-        }
+        } */
     }
-
-    
-    
-    
 }

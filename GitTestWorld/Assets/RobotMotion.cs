@@ -22,7 +22,9 @@ public class RobotMotion : MonoBehaviour
 
     public int playerDamage;
 
-    public float attackDelay = 1f;
+    public float attackDelay;
+
+    public playerMotor playerMotor;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -35,7 +37,6 @@ public class RobotMotion : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        currentHealth = 100;
     }
 
     private void Awake()
@@ -47,14 +48,19 @@ public class RobotMotion : MonoBehaviour
     private void Update()
     {
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        attackDelay = playerMotor.attackDelayCurrent;
 
         if (!playerInAttackRange) ChasePlayer();
         if (playerInAttackRange)
         {
             AttackPlayer();
-            if (Input.GetKey("mouse 0"))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && attackDelay <= 0.02)
             {
                 AttackEnemy(playerDamage);
+            }
+            else
+            {
+                return;
             }
         }
 
@@ -117,7 +123,7 @@ public class RobotMotion : MonoBehaviour
     {
         currentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && tag == "Enemy")
         {
             Destroy(gameObject);
         }
