@@ -128,4 +128,9 @@ public class RobotMotion : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        AttackEnemy(100);
+    }
 }

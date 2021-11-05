@@ -20,8 +20,9 @@ public class playerMotor : MonoBehaviour
     [SerializeField] private float Sensitivity;
     [SerializeField] private float JumpForce;
     [SerializeField] private float attackDelay;
-    [SerializeField] public Animator anim;
-    
+    [SerializeField] public Animator playerAnim;
+    [SerializeField] public Animator weaponAnim;
+
 
     // Update is called once per frame
 
@@ -37,16 +38,28 @@ public class playerMotor : MonoBehaviour
         Move();
         MovePlayerCamera();
 
-        
-        attackDelayCurrent -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Mouse0) && attackDelayCurrent <= 0)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            attackDelayCurrent = attackDelay;
-            anim.SetBool("isAttacking", true);
+            weaponAnim.SetBool("isShooting", true);
+            weaponAnim.SetBool("hasShot", true);
+            weaponAnim.SetBool("isReloading", false);
+            weaponAnim.SetBool("hasReloaded", false);
         }
         else
         {
-            anim.SetBool("isAttacking", false);
+            weaponAnim.SetBool("isShooting", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            weaponAnim.SetBool("isReloading", true);
+            weaponAnim.SetBool("hasReloaded", true);
+            weaponAnim.SetBool("isShooting", false);
+            weaponAnim.SetBool("hasShot", false);
+        }
+        else
+        {
+            weaponAnim.SetBool("isReloading", false);
         }
     }
 
