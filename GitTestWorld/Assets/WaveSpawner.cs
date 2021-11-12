@@ -28,11 +28,15 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField] public HealthBarScript healthBar;
     [SerializeField] public RobotMotion robot;
+    public bool spawnWaves;
 
     public SpawnState state = SpawnState.COUNTING;
     private void Start()
     {
-        waveCountdown = timeBetweenWaves;
+        if (spawnWaves)
+        {
+            waveCountdown = timeBetweenWaves;
+        }
     }
 
     private void Update()

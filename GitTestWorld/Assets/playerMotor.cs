@@ -22,6 +22,8 @@ public class playerMotor : MonoBehaviour
     [SerializeField] private float attackDelay;
     [SerializeField] public Animator playerAnim;
     [SerializeField] public Animator weaponAnim;
+    public Transform respawnPoint;
+    public Transform player;
 
 
     // Update is called once per frame
@@ -29,6 +31,8 @@ public class playerMotor : MonoBehaviour
     private void Start()
     {
         attackDelayCurrent = attackDelay;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
     }
     void Update()
     {
@@ -43,7 +47,7 @@ public class playerMotor : MonoBehaviour
             weaponAnim.SetBool("isShooting", true);
             weaponAnim.SetBool("hasShot", true);
             weaponAnim.SetBool("isReloading", false);
-            weaponAnim.SetBool("hasReloaded", false);
+            weaponAnim.SetBool("hasReloaded", true);
         }
         else
         {
@@ -61,6 +65,8 @@ public class playerMotor : MonoBehaviour
         {
             weaponAnim.SetBool("isReloading", false);
         }
+
+        
     }
 
     void Move()
@@ -96,5 +102,8 @@ public class playerMotor : MonoBehaviour
         PlayerCamera.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        player.transform.position = respawnPoint.transform.position;
+    }
 }
