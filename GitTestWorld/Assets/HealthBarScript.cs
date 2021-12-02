@@ -52,11 +52,11 @@ public class HealthBarScript : MonoBehaviour
         {
             isDead = true;
             SetMaxHealth(100);
-            RespawnPlayer(player, respawnPoint);           
+            RespawnPlayer();           
         }
     }
 
-    public void RespawnPlayer(Transform player, Transform respawnPoint)
+    public void RespawnPlayer()
     {
         player.transform.position = respawnPoint.transform.position;
     }

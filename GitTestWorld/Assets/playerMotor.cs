@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class playerMotor : MonoBehaviour
 { 
@@ -10,6 +11,7 @@ public class playerMotor : MonoBehaviour
     private float xRot;
     private float Speed;
     public float attackDelayCurrent;
+    private bool bossDead = false;
 
     [SerializeField] private LayerMask FloorMask;
     [SerializeField] private Transform FeetTransform;
@@ -24,7 +26,8 @@ public class playerMotor : MonoBehaviour
     [SerializeField] public Animator weaponAnim;
     public Transform respawnPoint;
     public Transform player;
-
+    public Transform bossPoint;
+    public TextMeshProUGUI winText;
 
     // Update is called once per frame
 
@@ -66,7 +69,15 @@ public class playerMotor : MonoBehaviour
             weaponAnim.SetBool("isReloading", false);
         }
 
-        
+        if (bossDead) {
+            bossDead = false;
+            if (winText != null)
+            {
+                winText.SetText("You Win!");
+            }
+            Invoke("RespawnPlayer", 3f);
+            Invoke("ClearText", 3f);
+        }
     }
 
     void Move()
@@ -104,6 +115,24 @@ public class playerMotor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        player.transform.position = bossPoint.transform.position;
+    }
+
+    public void SetBossDead(bool death)
+    {
+        bossDead = death;
+    }
+
+    public void RespawnPlayer()
+    {
         player.transform.position = respawnPoint.transform.position;
+    }
+
+    public void ClearText()
+    {
+        if (winText != null)
+        {
+            winText.SetText("");
+        }
     }
 }

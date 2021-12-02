@@ -28,15 +28,13 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField] public HealthBarScript healthBar;
     [SerializeField] public RobotMotion robot;
-    public bool spawnWaves;
+    public bool allWavesDone = false;
+    public GameObject casinoBlocker;
 
     public SpawnState state = SpawnState.COUNTING;
     private void Start()
     {
-        if (spawnWaves)
-        {
-            waveCountdown = timeBetweenWaves;
-        }
+        waveCountdown = timeBetweenWaves;
     }
 
     private void Update()
@@ -71,6 +69,10 @@ public class WaveSpawner : MonoBehaviour
             waveCountdown -= Time.deltaTime;
         }
 
+        if(allWavesDone)
+        {
+            Destroy(casinoBlocker);
+        }
     }
 
     void WaveCompleted() 
@@ -84,6 +86,7 @@ public class WaveSpawner : MonoBehaviour
         {
             nextWave = 0;
             Debug.Log("Completed All Waves. Looping...");
+            allWavesDone = true;
         }
         else
         {

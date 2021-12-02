@@ -9,9 +9,7 @@ public class BossMotion : MonoBehaviour
 
     public Transform player;
 
-    public GameObject playerBody;
-
-    public LayerMask whatIsGround, whatIsPlayer;
+    public LayerMask whatIsPlayer;
 
     public Animator animator;
 
@@ -24,6 +22,10 @@ public class BossMotion : MonoBehaviour
     public float attackDelay;
 
     public playerMotor playerMotor;
+
+    public int damageToPlayer;
+
+    public float damageDelay;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -49,7 +51,7 @@ public class BossMotion : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         attackDelay = playerMotor.attackDelayCurrent;
 
-        if (!playerInAttackRange)
+        if (!playerInAttackRange && animator.GetBool("isAttacking") == false)
         {
             ChasePlayer();
         }
@@ -57,14 +59,6 @@ public class BossMotion : MonoBehaviour
         if (playerInAttackRange)
         {
             AttackPlayer();
-            if (Input.GetKeyDown(KeyCode.Mouse0) && attackDelay <= 0.02)
-            {
-                AttackEnemy(playerDamage);
-            }
-            else
-            {
-                return;
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.M))
@@ -97,7 +91,7 @@ public class BossMotion : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            healthBar.TakeDamage(2);
+            Invoke("TakeDamage", damageDelay);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -129,6 +123,7 @@ public class BossMotion : MonoBehaviour
 
         if (currentHealth <= 0 && tag == "Enemy")
         {
+            playerMotor.SetBossDead(true);
             Destroy(gameObject);
         }
     }
@@ -137,4 +132,9 @@ public class BossMotion : MonoBehaviour
     {
         AttackEnemy(100);
     }
+
+    public void TakeDamage() {
+        healthBar.TakeDamage(damageToPlayer);
+    }
+
 }
