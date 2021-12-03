@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
 
-    public enum SpawnState { SPAWNING, WAITING, COUNTING };
+    public enum SpawnState { SPAWNING, WAITING, COUNTING, DONE };
 
     [System.Serializable]
     public class Wave {
@@ -28,8 +29,14 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField] public HealthBarScript healthBar;
     [SerializeField] public RobotMotion robot;
+
+    public bool firstStageDone = false;
+    public GameObject parkBlocker;
     public bool allWavesDone = false;
     public GameObject casinoBlocker;
+
+    public TextMeshProUGUI waveCounter;
+    
 
     public SpawnState state = SpawnState.COUNTING;
     private void Start()
@@ -69,10 +76,17 @@ public class WaveSpawner : MonoBehaviour
             waveCountdown -= Time.deltaTime;
         }
 
+        if(firstStageDone)
+        {
+            Destroy(parkBlocker);
+        }
+
         if(allWavesDone)
         {
             Destroy(casinoBlocker);
         }
+
+        waveCounter.SetText("Wave: " + (nextWave + 1));
     }
 
     void WaveCompleted() 
@@ -82,9 +96,14 @@ public class WaveSpawner : MonoBehaviour
         state = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
 
+        if(nextWave == 0)
+        {
+            firstStageDone = true;
+        }
+
         if (nextWave + 1 > waves.Length - 1)
         {
-            nextWave = 0;
+            state = SpawnState.DONE;
             Debug.Log("Completed All Waves. Looping...");
             allWavesDone = true;
         }

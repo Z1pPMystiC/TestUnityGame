@@ -27,6 +27,8 @@ public class BossMotion : MonoBehaviour
 
     public float damageDelay;
 
+    public int projectileDamage;
+
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -63,12 +65,12 @@ public class BossMotion : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            DestroyEnemies();
+            DestroyBoss();
         }
 
         if (healthBar.IsDead())
         {
-            DestroyEnemies();
+            DestroyBoss();
         }
     }
 
@@ -103,9 +105,9 @@ public class BossMotion : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void DestroyEnemies()
+    public void DestroyBoss()
     {
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Boss"))
         {
             Destroy(enemy);
         }
@@ -121,7 +123,7 @@ public class BossMotion : MonoBehaviour
     {
         currentHealth -= damage;
 
-        if (currentHealth <= 0 && tag == "Enemy")
+        if (currentHealth <= 0 && tag == "Boss")
         {
             playerMotor.SetBossDead(true);
             Destroy(gameObject);
@@ -130,7 +132,7 @@ public class BossMotion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AttackEnemy(100);
+        AttackEnemy(projectileDamage);
     }
 
     public void TakeDamage() {

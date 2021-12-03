@@ -36,6 +36,7 @@ public class playerMotor : MonoBehaviour
         attackDelayCurrent = attackDelay;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
+        player.transform.position = respawnPoint.transform.position;
     }
     void Update()
     {
