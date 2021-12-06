@@ -75,6 +75,7 @@ public class FloppyLauncherScript : MonoBehaviour
         GameObject currentBullet = Instantiate(projectile, attackPoint.position, Quaternion.identity);
 
         currentBullet.transform.forward = directionWithoutSpread.normalized;
+        currentBullet.transform.up = new Vector3(0f, -1f, 0f);
 
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
 

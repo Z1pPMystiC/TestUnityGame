@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class BossMotion : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class BossMotion : MonoBehaviour
     public float damageDelay;
 
     public int projectileDamage;
+
+    public Slider bossHealth;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -72,6 +75,8 @@ public class BossMotion : MonoBehaviour
         {
             DestroyBoss();
         }
+
+        bossHealth.value = currentHealth;
     }
 
     private void ChasePlayer()

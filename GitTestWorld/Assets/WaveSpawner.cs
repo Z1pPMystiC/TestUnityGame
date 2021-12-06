@@ -36,7 +36,8 @@ public class WaveSpawner : MonoBehaviour
     public GameObject casinoBlocker;
 
     public TextMeshProUGUI waveCounter;
-    
+    public TextMeshProUGUI centerText;
+
 
     public SpawnState state = SpawnState.COUNTING;
     private void Start()
@@ -78,12 +79,18 @@ public class WaveSpawner : MonoBehaviour
 
         if(firstStageDone)
         {
+            firstStageDone = false;
             Destroy(parkBlocker);
+            centerText.SetText("The Park Gates Have Opened.");
+            Invoke("ClearText", 2f);
         }
 
         if(allWavesDone)
         {
+            allWavesDone = false;
             Destroy(casinoBlocker);
+            centerText.SetText("The Casino Has Opened.");
+            Invoke("ClearText", 2f);
         }
 
         waveCounter.SetText("Wave: " + (nextWave + 1));
@@ -96,7 +103,7 @@ public class WaveSpawner : MonoBehaviour
         state = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
 
-        if(nextWave == 0)
+        if(nextWave == 2)
         {
             firstStageDone = true;
         }
@@ -151,5 +158,13 @@ public class WaveSpawner : MonoBehaviour
         gameClone.tag = "Enemy";
         gameClone.GetComponent<RobotMotion>().SetCurrentHealth(health);
         Debug.Log("Spawning Enemy: " + _enemy.name);
+    }
+
+    public void ClearText()
+    {
+        if (centerText != null)
+        {
+            centerText.SetText("");
+        }
     }
 }
