@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using TMPro;
 
 public class BossMotion : MonoBehaviour
 {
@@ -15,10 +16,9 @@ public class BossMotion : MonoBehaviour
     public Animator animator;
 
     public int currentHealth;
+    public int maxHealth;
 
     public HealthBarScript healthBar;
-
-    public int playerDamage;
 
     public float attackDelay;
 
@@ -31,6 +31,12 @@ public class BossMotion : MonoBehaviour
     public int projectileDamage;
 
     public Slider bossHealth;
+    public TextMeshProUGUI bossNameText;
+    public TextMeshProUGUI bossHealthText;
+
+    public string bossName;
+
+    public bool playerInBossArena = false;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -43,6 +49,10 @@ public class BossMotion : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
+        bossHealth.value = 0;
+        bossNameText.SetText("");
+        bossHealthText.SetText("");
     }
 
     private void Awake()
@@ -76,7 +86,13 @@ public class BossMotion : MonoBehaviour
             DestroyBoss();
         }
 
-        bossHealth.value = currentHealth;
+        if (playerInBossArena)
+        {
+            bossHealth.value = currentHealth;
+            bossNameText.SetText(bossName);
+            bossHealthText.SetText(currentHealth + " / " + maxHealth + " HP");
+        }
+        
     }
 
     private void ChasePlayer()
@@ -130,6 +146,7 @@ public class BossMotion : MonoBehaviour
 
         if (currentHealth <= 0 && tag == "Boss")
         {
+            currentHealth = 0;
             playerMotor.SetBossDead(true);
             Destroy(gameObject);
         }

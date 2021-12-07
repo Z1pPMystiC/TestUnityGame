@@ -28,6 +28,7 @@ public class playerMotor : MonoBehaviour
     public Transform player;
     public Transform bossPoint;
     public TextMeshProUGUI winText;
+    public BossMotion bossClass;
 
     // Update is called once per frame
 
@@ -117,6 +118,7 @@ public class playerMotor : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         player.transform.position = bossPoint.transform.position;
+        bossClass.playerInBossArena = true;
     }
 
     public void SetBossDead(bool death)

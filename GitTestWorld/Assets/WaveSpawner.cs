@@ -15,6 +15,7 @@ public class WaveSpawner : MonoBehaviour
         public int count;
         public float rate;
         public int currentHealth;
+        public Transform[] spawnPoints;
     }
 
     public Wave[] waves;
@@ -25,7 +26,7 @@ public class WaveSpawner : MonoBehaviour
 
     private float searchCountdown = 1f;
 
-    public Transform[] spawnPoints;
+    
 
     [SerializeField] public HealthBarScript healthBar;
     [SerializeField] public RobotMotion robot;
@@ -142,18 +143,18 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < _wave.count; i++)
         {
             GameObject _en = _wave.enemies[Random.Range(0, _wave.enemies.Length)];
-            SpawnEnemy(_en, _wave.currentHealth);
+            SpawnEnemy(_en, _wave.currentHealth, _wave);
             yield return new WaitForSeconds(1f / _wave.rate);
         }
 
         state = SpawnState.WAITING;
 
-        yield break;
+        yield break;   
     }
 
-    void SpawnEnemy(GameObject _enemy, int health)
+    void SpawnEnemy(GameObject _enemy, int health, Wave _wave)
     {
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Transform _sp = _wave.spawnPoints[Random.Range(0, _wave.spawnPoints.Length)];
         GameObject gameClone = Instantiate(_enemy, _sp.transform.position, _sp.transform.rotation);
         gameClone.tag = "Enemy";
         gameClone.GetComponent<RobotMotion>().SetCurrentHealth(health);
