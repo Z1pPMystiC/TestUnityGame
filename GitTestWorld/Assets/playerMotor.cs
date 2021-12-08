@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class playerMotor : MonoBehaviour
@@ -29,6 +30,7 @@ public class playerMotor : MonoBehaviour
     public Transform bossPoint;
     public TextMeshProUGUI winText;
     public BossMotion bossClass;
+    public Image crosshair;
 
     // Update is called once per frame
 
@@ -65,6 +67,7 @@ public class playerMotor : MonoBehaviour
             weaponAnim.SetBool("hasReloaded", true);
             weaponAnim.SetBool("isShooting", false);
             weaponAnim.SetBool("hasShot", false);
+
         }
         else
         {
@@ -73,6 +76,8 @@ public class playerMotor : MonoBehaviour
 
         if (bossDead) {
             bossDead = false;
+            bossClass.bossHealth.value = 0;
+            bossClass.bossHealthText.SetText("0 / 100 HP");
             if (winText != null)
             {
                 winText.SetText("You Win!");
@@ -115,10 +120,10 @@ public class playerMotor : MonoBehaviour
         PlayerCamera.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         player.transform.position = bossPoint.transform.position;
-        bossClass.playerInBossArena = true;
+        bossClass.SetPlayerInBossArena(true);
     }
 
     public void SetBossDead(bool death)

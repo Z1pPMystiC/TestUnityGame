@@ -161,4 +161,8 @@ public class BossMotion : MonoBehaviour
         healthBar.TakeDamage(damageToPlayer);
     }
 
+    public void SetPlayerInBossArena(bool boolean) {
+        playerInBossArena = boolean;
+    }
+
 }
