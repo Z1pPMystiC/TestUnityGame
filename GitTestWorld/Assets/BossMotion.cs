@@ -76,16 +76,6 @@ public class BossMotion : MonoBehaviour
             AttackPlayer();
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            DestroyBoss();
-        }
-
-        if (healthBar.IsDead())
-        {
-            DestroyBoss();
-        }
-
         if (playerInBossArena)
         {
             bossHealth.value = currentHealth;
@@ -155,6 +145,7 @@ public class BossMotion : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         AttackEnemy(projectileDamage);
+        playerMotor.enemyHit = true;
     }
 
     public void TakeDamage() {

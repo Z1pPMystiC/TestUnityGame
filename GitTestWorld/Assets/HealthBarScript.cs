@@ -10,6 +10,8 @@ public class HealthBarScript : MonoBehaviour
     public bool isDead = false;
     private float respawnCountdown = 1f;
 
+    public playerMotor playerMotor;
+
     
     [SerializeField] public Transform respawnPoint;
     [SerializeField] public Transform player;
@@ -52,7 +54,8 @@ public class HealthBarScript : MonoBehaviour
         {
             isDead = true;
             SetMaxHealth(100);
-            RespawnPlayer();           
+            RespawnPlayer();
+            playerMotor.playerDead = true;
         }
     }
 

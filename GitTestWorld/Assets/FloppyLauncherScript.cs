@@ -8,7 +8,7 @@ public class FloppyLauncherScript : MonoBehaviour
     public float shootForce, upwardForce;
 
     public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerTap, fullAmmo;
+    public int magazineSize, bulletsPerTap, ammoLeft, fullAmmo;
     public bool allowButtonHold;
     public int bulletsLeft, bulletsShot;
     public bool shooting, readyToShoot, reloading;
@@ -24,6 +24,7 @@ public class FloppyLauncherScript : MonoBehaviour
     private void Awake()
     {
         bulletsLeft = magazineSize;
+        ammoLeft = fullAmmo;
         readyToShoot = true;
     }
     void Update()
@@ -32,7 +33,7 @@ public class FloppyLauncherScript : MonoBehaviour
 
         if(ammoDisplay != null)
         {
-            ammoDisplay.SetText(bulletsLeft + " / " + fullAmmo);
+            ammoDisplay.SetText(bulletsLeft + " / " + ammoLeft);
         }
     }
 
@@ -102,7 +103,7 @@ public class FloppyLauncherScript : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        fullAmmo -= (magazineSize - bulletsLeft);
+        ammoLeft -= (magazineSize - bulletsLeft);
         bulletsLeft = magazineSize;
         reloading = false;
     }

@@ -19,10 +19,10 @@ public class WaveSpawner : MonoBehaviour
     }
 
     public Wave[] waves;
-    private int nextWave = 0;
+    public int nextWave = 0;
 
     public float timeBetweenWaves = 5f;
-    private float waveCountdown;
+    public float waveCountdown;
 
     private float searchCountdown = 1f;
 

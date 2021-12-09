@@ -11,8 +11,6 @@ public class RobotMotion : MonoBehaviour
 
     public Transform player;
 
-    public GameObject playerBody;
-
     public LayerMask whatIsGround, whatIsPlayer;
 
     public Animator animator;
@@ -21,16 +19,10 @@ public class RobotMotion : MonoBehaviour
 
     public HealthBarScript healthBar;
 
-    public int playerDamage;
-
-    public float attackDelay;
-
     public playerMotor playerMotor;
 
-    public Image leftCrosshair;
-    public Image rightCrosshair;
-    public Image upCrosshair;
-    public Image downCrosshair;
+    public int damageToPlayer, damageByPlayer;
+
 
     //Attacking
     public float timeBetweenAttacks;
@@ -54,20 +46,11 @@ public class RobotMotion : MonoBehaviour
     private void Update()
     {
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        attackDelay = playerMotor.attackDelayCurrent;
 
         if (!playerInAttackRange) ChasePlayer();
         if (playerInAttackRange)
         {
             AttackPlayer();
-            if (Input.GetKeyDown(KeyCode.Mouse0) && attackDelay <= 0.02)
-            {
-                AttackEnemy(playerDamage);
-            }
-            else
-            {
-                return;
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.M))
@@ -99,7 +82,7 @@ public class RobotMotion : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            healthBar.TakeDamage(2);
+            healthBar.TakeDamage(damageToPlayer);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -137,35 +120,9 @@ public class RobotMotion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AttackEnemy(100);
-        var tempColorLeft = leftCrosshair.color;
-        var tempColorRight = rightCrosshair.color;
-        var tempColorUp = upCrosshair.color;
-        var tempColorDown = downCrosshair.color;
-        tempColorLeft.a = 1f;
-        tempColorRight.a = 1f;
-        tempColorUp.a = 1f;
-        tempColorDown.a = 1f;
-        leftCrosshair.color = tempColorLeft;
-        rightCrosshair.color = tempColorRight;
-        upCrosshair.color = tempColorUp;
-        downCrosshair.color = tempColorDown;
-        Invoke("ClearHitmarker", 0.5f);
+        AttackEnemy(damageByPlayer);
+        playerMotor.enemyHit = true;
     }
 
-    public void ClearHitmarker()
-    {
-        var tempColorLeft = leftCrosshair.color;
-        var tempColorRight = rightCrosshair.color;
-        var tempColorUp = upCrosshair.color;
-        var tempColorDown = downCrosshair.color;
-        tempColorLeft.a = 0f;
-        tempColorRight.a = 0f;
-        tempColorUp.a = 0f;
-        tempColorDown.a = 0f;
-        leftCrosshair.color = tempColorLeft;
-        rightCrosshair.color = tempColorRight;
-        upCrosshair.color = tempColorUp;
-        downCrosshair.color = tempColorDown;
-    }
+    
 }

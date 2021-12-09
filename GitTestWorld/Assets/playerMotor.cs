@@ -13,6 +13,8 @@ public class playerMotor : MonoBehaviour
     private float Speed;
     public float attackDelayCurrent;
     private bool bossDead = false;
+    public bool enemyHit = false;
+    public bool playerDead = false;
 
     [SerializeField] private LayerMask FloorMask;
     [SerializeField] private Transform FeetTransform;
@@ -30,7 +32,12 @@ public class playerMotor : MonoBehaviour
     public Transform bossPoint;
     public TextMeshProUGUI winText;
     public BossMotion bossClass;
-    public Image crosshair;
+    public Image leftCrosshair;
+    public Image rightCrosshair;
+    public Image upCrosshair;
+    public Image downCrosshair;
+    public FloppyLauncherScript floppyLauncher;
+    public WaveSpawner waveClass;
 
     // Update is called once per frame
 
@@ -84,6 +91,29 @@ public class playerMotor : MonoBehaviour
             }
             Invoke("RespawnPlayer", 3f);
             Invoke("ClearText", 3f);
+        }
+
+        if (enemyHit) {
+            enemyHit = false;
+            var tempColorLeft = leftCrosshair.color;
+            var tempColorRight = rightCrosshair.color;
+            var tempColorUp = upCrosshair.color;
+            var tempColorDown = downCrosshair.color;
+            tempColorLeft.a = 1f;
+            tempColorRight.a = 1f;
+            tempColorUp.a = 1f;
+            tempColorDown.a = 1f;
+            leftCrosshair.color = tempColorLeft;
+            rightCrosshair.color = tempColorRight;
+            upCrosshair.color = tempColorUp;
+            downCrosshair.color = tempColorDown;
+            Invoke("ClearHitmarker", 0.1f);
+        }
+
+        if (playerDead)
+        {
+            playerDead = false;
+            Restart();
         }
     }
 
@@ -142,5 +172,35 @@ public class playerMotor : MonoBehaviour
         {
             winText.SetText("");
         }
+    }
+
+    public void ClearHitmarker()
+    {
+        var tempColorLeft = leftCrosshair.color;
+        var tempColorRight = rightCrosshair.color;
+        var tempColorUp = upCrosshair.color;
+        var tempColorDown = downCrosshair.color;
+        tempColorLeft.a = 0f;
+        tempColorRight.a = 0f;
+        tempColorUp.a = 0f;
+        tempColorDown.a = 0f;
+        leftCrosshair.color = tempColorLeft;
+        rightCrosshair.color = tempColorRight;
+        upCrosshair.color = tempColorUp;
+        downCrosshair.color = tempColorDown;
+    }
+
+    public void Restart()
+    {
+        winText.SetText("You Lose.");
+        bossClass.bossHealth.value = 0;
+        bossClass.bossNameText.SetText("");
+        bossClass.bossHealthText.SetText("");
+        floppyLauncher.bulletsLeft = floppyLauncher.magazineSize;
+        floppyLauncher.ammoLeft = floppyLauncher.fullAmmo;
+        waveClass.nextWave = 0;
+        waveClass.waveCountdown = waveClass.timeBetweenWaves;
+        waveClass.state = WaveSpawner.SpawnState.COUNTING;
+        Invoke("ClearText", 1f);
     }
 }
