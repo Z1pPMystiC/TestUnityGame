@@ -33,11 +33,15 @@ public class WaveSpawner : MonoBehaviour
 
     public bool firstStageDone = false;
     public GameObject parkBlocker;
+    public bool thirdDone = false;
+    public bool twoThirdsDone = false;
     public bool allWavesDone = false;
     public GameObject casinoBlocker;
 
     public TextMeshProUGUI waveCounter;
     public TextMeshProUGUI centerText;
+
+    public FloppyLauncherScript floppyLauncher;
 
 
     public SpawnState state = SpawnState.COUNTING;
@@ -86,6 +90,15 @@ public class WaveSpawner : MonoBehaviour
             Invoke("ClearText", 2f);
         }
 
+        if(thirdDone || twoThirdsDone)
+        {
+            thirdDone = false;
+            twoThirdsDone = false;
+            floppyLauncher.ammoLeft = floppyLauncher.fullAmmo;
+            centerText.SetText("Max Ammo.\nAmmo has been replenished");
+            Invoke("ClearText", 2f);
+        }
+
         if(allWavesDone)
         {
             allWavesDone = false;
@@ -107,6 +120,16 @@ public class WaveSpawner : MonoBehaviour
         if(nextWave == 2)
         {
             firstStageDone = true;
+        }
+
+        if (nextWave == 4)
+        {
+            thirdDone = true;
+        }
+
+        if (nextWave == 7)
+        {
+            twoThirdsDone = true;
         }
 
         if (nextWave + 1 > waves.Length - 1)

@@ -90,7 +90,10 @@ public class playerMotor : MonoBehaviour
                 winText.SetText("You Win!");
             }
             Invoke("RespawnPlayer", 3f);
-            Invoke("ClearText", 3f);
+            waveClass.nextWave = 0;
+            waveClass.waveCountdown = waveClass.timeBetweenWaves;
+            waveClass.state = WaveSpawner.SpawnState.COUNTING;
+            Invoke("Restart", 3f);
         }
 
         if (enemyHit) {
@@ -113,7 +116,12 @@ public class playerMotor : MonoBehaviour
         if (playerDead)
         {
             playerDead = false;
-            Restart();
+            bossClass.SetPlayerInBossArena(false);
+            winText.SetText("You Lose.");
+            waveClass.nextWave = 0;
+            waveClass.waveCountdown = waveClass.timeBetweenWaves;
+            waveClass.state = WaveSpawner.SpawnState.COUNTING;
+            Invoke("Restart", 3f);
         }
     }
 
@@ -192,15 +200,11 @@ public class playerMotor : MonoBehaviour
 
     public void Restart()
     {
-        winText.SetText("You Lose.");
+        winText.SetText("");
         bossClass.bossHealth.value = 0;
         bossClass.bossNameText.SetText("");
         bossClass.bossHealthText.SetText("");
         floppyLauncher.bulletsLeft = floppyLauncher.magazineSize;
         floppyLauncher.ammoLeft = floppyLauncher.fullAmmo;
-        waveClass.nextWave = 0;
-        waveClass.waveCountdown = waveClass.timeBetweenWaves;
-        waveClass.state = WaveSpawner.SpawnState.COUNTING;
-        Invoke("ClearText", 1f);
     }
 }

@@ -23,6 +23,7 @@ public class RobotMotion : MonoBehaviour
 
     public int damageToPlayer, damageByPlayer;
 
+    public WaveSpawner waveSpawner;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -100,7 +101,6 @@ public class RobotMotion : MonoBehaviour
         {
             Destroy(enemy);
         }
-        
     }
 
     public void SetCurrentHealth(int health)

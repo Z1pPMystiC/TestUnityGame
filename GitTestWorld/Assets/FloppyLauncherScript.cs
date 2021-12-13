@@ -26,6 +26,11 @@ public class FloppyLauncherScript : MonoBehaviour
         bulletsLeft = magazineSize;
         ammoLeft = fullAmmo;
         readyToShoot = true;
+        
+        if(ammoLeft <= 0)
+        {
+            ammoLeft = 0;
+        }
     }
     void Update()
     {
@@ -41,7 +46,7 @@ public class FloppyLauncherScript : MonoBehaviour
     {
         shooting = Input.GetKeyDown(KeyCode.Mouse0);
         
-        if(Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
+        if(Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading && ammoLeft > 0)
         {
             Reload();
         }

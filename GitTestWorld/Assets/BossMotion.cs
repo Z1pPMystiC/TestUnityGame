@@ -20,8 +20,6 @@ public class BossMotion : MonoBehaviour
 
     public HealthBarScript healthBar;
 
-    public float attackDelay;
-
     public playerMotor playerMotor;
 
     public int damageToPlayer;
@@ -64,7 +62,6 @@ public class BossMotion : MonoBehaviour
     private void Update()
     {
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        attackDelay = playerMotor.attackDelayCurrent;
 
         if (!playerInAttackRange && animator.GetBool("isAttacking") == false)
         {
@@ -98,12 +95,14 @@ public class BossMotion : MonoBehaviour
 
         transform.LookAt(player);
 
-
         animator.SetBool("isWalking", false);
-        animator.SetBool("isAttacking", true);
+        animator.SetBool("isAttacking", false) ;
 
         if (!alreadyAttacked)
         {
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isAttacking", true);
+
             Invoke("TakeDamage", damageDelay);
 
             alreadyAttacked = true;
