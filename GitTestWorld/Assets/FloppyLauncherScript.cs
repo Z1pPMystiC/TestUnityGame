@@ -26,11 +26,6 @@ public class FloppyLauncherScript : MonoBehaviour
         bulletsLeft = magazineSize;
         ammoLeft = fullAmmo;
         readyToShoot = true;
-        
-        if(ammoLeft <= 0)
-        {
-            ammoLeft = 0;
-        }
     }
     void Update()
     {
@@ -108,8 +103,16 @@ public class FloppyLauncherScript : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        ammoLeft -= (magazineSize - bulletsLeft);
-        bulletsLeft = magazineSize;
+        if (ammoLeft < magazineSize)
+        {
+            bulletsLeft += ammoLeft;
+            ammoLeft = 0;
+        }
+        else
+        {
+            ammoLeft -= (magazineSize - bulletsLeft);
+            bulletsLeft = magazineSize;
+        }
         reloading = false;
     }
     

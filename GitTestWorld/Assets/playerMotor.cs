@@ -38,6 +38,7 @@ public class playerMotor : MonoBehaviour
     public Image downCrosshair;
     public FloppyLauncherScript floppyLauncher;
     public WaveSpawner waveClass;
+    public Camera camera;
 
     // Update is called once per frame
 
@@ -47,6 +48,10 @@ public class playerMotor : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
         player.transform.position = respawnPoint.transform.position;
+        Transform camTransform = camera.GetComponent<Transform>();
+        float xRot = Mathf.Clamp(camTransform.eulerAngles.x, -5f, 5f);
+        camTransform.eulerAngles = new Vector3(xRot, camTransform.eulerAngles.y, camTransform.eulerAngles.z);
+
     }
     void Update()
     {
@@ -84,7 +89,7 @@ public class playerMotor : MonoBehaviour
         if (bossDead) {
             bossDead = false;
             bossClass.bossHealth.value = 0;
-            bossClass.bossHealthText.SetText("0 / 100 HP");
+            bossClass.bossHealthText.SetText("0 / " + bossClass.maxHealth + " HP");
             if (winText != null)
             {
                 winText.SetText("You Win!");

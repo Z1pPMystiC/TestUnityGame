@@ -103,6 +103,7 @@ public class WaveSpawner : MonoBehaviour
         {
             allWavesDone = false;
             Destroy(casinoBlocker);
+            floppyLauncher.ammoLeft = floppyLauncher.fullAmmo;
             centerText.SetText("The Casino Has Opened.");
             Invoke("ClearText", 2f);
         }

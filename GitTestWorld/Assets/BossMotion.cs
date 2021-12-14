@@ -51,6 +51,7 @@ public class BossMotion : MonoBehaviour
         bossHealth.value = 0;
         bossNameText.SetText("");
         bossHealthText.SetText("");
+        bossHealth.maxValue = maxHealth;
     }
 
     private void Awake()
