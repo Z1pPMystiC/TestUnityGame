@@ -41948,7 +41948,7 @@ MonoBehaviour:
   PlayerCamera: {fileID: 1939600882}
   PlayerBody: {fileID: 1662995666}
   walkSpeed: 4
-  sprintSpeed: 20
+  sprintSpeed: 15
   Sensitivity: 3
   JumpForce: 15
   attackDelay: 0.5
