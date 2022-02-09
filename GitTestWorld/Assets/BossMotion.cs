@@ -36,6 +36,8 @@ public class BossMotion : MonoBehaviour
 
     public bool playerInBossArena = false;
 
+    public bool enemyHit = false;
+
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -80,7 +82,12 @@ public class BossMotion : MonoBehaviour
             bossNameText.SetText(bossName);
             bossHealthText.SetText(currentHealth + " / " + maxHealth + " HP");
         }
-        
+
+        if (enemyHit)
+        {
+            AttackEnemy(projectileDamage);
+            playerMotor.enemyHit = true;
+        }
     }
 
     private void ChasePlayer()
@@ -144,8 +151,12 @@ public class BossMotion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AttackEnemy(projectileDamage);
-        playerMotor.enemyHit = true;
+        enemyHit = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        enemyHit = false;
     }
 
     public void TakeDamage() {

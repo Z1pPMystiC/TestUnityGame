@@ -39,6 +39,7 @@ public class playerMotor : MonoBehaviour
     public FloppyLauncherScript floppyLauncher;
     public WaveSpawner waveClass;
     public Camera camera;
+    public PauseMenu pauseMenu;
 
     // Update is called once per frame
 
@@ -59,7 +60,11 @@ public class playerMotor : MonoBehaviour
         PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
         Move();
-        MovePlayerCamera();
+        if (!pauseMenu.gameIsPaused)
+        {
+            MovePlayerCamera();
+        }
+        
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -116,6 +121,7 @@ public class playerMotor : MonoBehaviour
             upCrosshair.color = tempColorUp;
             downCrosshair.color = tempColorDown;
             Invoke("ClearHitmarker", 0.1f);
+            FindObjectOfType<AudioManager>().Play("Hitmarker");
         }
 
         if (playerDead)
@@ -126,6 +132,7 @@ public class playerMotor : MonoBehaviour
             waveClass.nextWave = 0;
             waveClass.waveCountdown = waveClass.timeBetweenWaves;
             waveClass.state = WaveSpawner.SpawnState.COUNTING;
+            FindObjectOfType<AudioManager>().Play("PlayerDeath");
             Invoke("Restart", 3f);
         }
     }

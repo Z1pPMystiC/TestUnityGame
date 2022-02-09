@@ -142,6 +142,7 @@ public class WaveSpawner : MonoBehaviour
         else
         {
             nextWave++;
+            Invoke("PlayNewWaveSound", timeBetweenWaves);
         }
         
     }
@@ -182,6 +183,8 @@ public class WaveSpawner : MonoBehaviour
         GameObject gameClone = Instantiate(_enemy, _sp.transform.position, _sp.transform.rotation);
         gameClone.tag = "Enemy";
         gameClone.GetComponent<RobotMotion>().SetCurrentHealth(health);
+        gameClone.GetComponent<AudioSource>().volume = 1;
+        gameClone.GetComponent<AudioSource>().time = 10f;
         Debug.Log("Spawning Enemy: " + _enemy.name);
     }
 
@@ -191,5 +194,10 @@ public class WaveSpawner : MonoBehaviour
         {
             centerText.SetText("");
         }
+    }
+
+    private void PlayNewWaveSound() 
+    {
+        FindObjectOfType<AudioManager>().Play("NewWave");
     }
 }

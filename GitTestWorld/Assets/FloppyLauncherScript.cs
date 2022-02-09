@@ -20,6 +20,7 @@ public class FloppyLauncherScript : MonoBehaviour
 
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammoDisplay;
+    public PauseMenu pauseMenu;
     
     private void Awake()
     {
@@ -29,7 +30,10 @@ public class FloppyLauncherScript : MonoBehaviour
     }
     void Update()
     {
-        MyInput();
+        if (!pauseMenu.gameIsPaused)
+        {
+            MyInput();
+        }
 
         if(ammoDisplay != null)
         {
@@ -51,6 +55,12 @@ public class FloppyLauncherScript : MonoBehaviour
             bulletsShot = 0;
 
             Shoot();
+        }
+
+        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
+        {
+            FindObjectOfType<AudioManager>().Play("EmptyMag");
+            Invoke("StopEmpty", 0.5f);
         }
     }
 
@@ -80,6 +90,8 @@ public class FloppyLauncherScript : MonoBehaviour
 
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
 
+        FindObjectOfType<AudioManager>().Play("ProjectileShot");
+
         bulletsLeft--;
         bulletsShot++;
 
@@ -99,6 +111,7 @@ public class FloppyLauncherScript : MonoBehaviour
     private void Reload()
     {
         reloading = true;
+        PlayForTime(reloadTime);
         Invoke("ReloadFinished", reloadTime);
     }
     private void ReloadFinished()
@@ -115,6 +128,21 @@ public class FloppyLauncherScript : MonoBehaviour
         }
         reloading = false;
     }
-    
+
+    public void PlayForTime(float time)
+    {
+        FindObjectOfType<AudioManager>().Play("Reload");
+        Invoke("StopAudio", time);
+ }
+
+    private void StopAudio()
+    {
+        FindObjectOfType<AudioManager>().Stop("Reload");
+    }
+
+    private void StopEmpty()
+    {
+        FindObjectOfType<AudioManager>().Stop("EmptyMag");
+    }
 }
 

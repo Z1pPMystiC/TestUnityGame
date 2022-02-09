@@ -21,9 +21,19 @@ public class RobotMotion : MonoBehaviour
 
     public playerMotor playerMotor;
 
-    public int damageToPlayer, damageByPlayer;
+    public int damageToPlayer;
+
+    public int floppyDamage, teslaDamage;
 
     public WaveSpawner waveSpawner;
+
+    public bool enemyHit = false;
+
+    public bool hitWithTesla = false;
+
+    public RaycastGun tesla;
+
+    public WeaponSwaper weaponSelected;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -63,6 +73,20 @@ public class RobotMotion : MonoBehaviour
         {
             DestroyEnemies();
         }
+        
+        if (enemyHit && weaponSelected.selectedWeapon == 0)
+        {
+            AttackEnemy(floppyDamage);
+            playerMotor.enemyHit = true;
+            Debug.Log("Floppy Hit");
+        }
+
+        /* if (enemyHit && weaponSelected.selectedWeapon == 1 && tesla.cooldown <= 0)
+        {
+            AttackEnemy(teslaDamage);
+            playerMotor.enemyHit = true;
+            Debug.Log("Tesla Hit");
+        } */
     }
 
     private void ChasePlayer()
@@ -115,14 +139,22 @@ public class RobotMotion : MonoBehaviour
         if (currentHealth <= 0 && tag == "Enemy")
         {
             Destroy(gameObject);
+            tesla.myList.Clear();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        AttackEnemy(damageByPlayer);
-        playerMotor.enemyHit = true;
+        enemyHit = true;
     }
 
-    
+    private void OnTriggerExit(Collider other)
+    {
+        Invoke("ClearHit", 0.05f);
+    }
+
+    private void ClearHit()
+    {
+        enemyHit = false;
+    } 
 }
