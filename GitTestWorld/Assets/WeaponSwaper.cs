@@ -6,6 +6,8 @@ public class WeaponSwaper : MonoBehaviour
     public int selectedWeapon = 0;
 
     public Transform ammoList;
+
+    public bool teslaEnabled = false;
     
     // Start is called before the first frame update
     void Start()
@@ -21,25 +23,32 @@ public class WeaponSwaper : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            if (selectedWeapon >= transform.childCount - 1)
+            if (teslaEnabled)
             {
-                selectedWeapon = 0;
-            }
-            else
-            {
-                selectedWeapon++;
+                if (selectedWeapon >= transform.childCount - 1)
+                {
+                    selectedWeapon = 0;
+                }
+                else
+                {
+                    selectedWeapon++;
+                }
             }
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (selectedWeapon <= 0)
+            if(teslaEnabled)
             {
-                selectedWeapon = transform.childCount - 1;
+                if (selectedWeapon <= 0)
+                {
+                    selectedWeapon = transform.childCount - 1;
+                }
+                else
+                {
+                    selectedWeapon--;
+                }
             }
-            else
-            {
-                selectedWeapon--;
-            }
+            
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -47,7 +56,7 @@ public class WeaponSwaper : MonoBehaviour
             selectedWeapon = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2 && teslaEnabled)
         {
             selectedWeapon = 1;
         }

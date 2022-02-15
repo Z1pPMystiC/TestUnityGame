@@ -35,6 +35,8 @@ public class RobotMotion : MonoBehaviour
 
     public WeaponSwaper weaponSelected;
 
+    public GameObject teslaPowerup;
+
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -80,13 +82,6 @@ public class RobotMotion : MonoBehaviour
             playerMotor.enemyHit = true;
             Debug.Log("Floppy Hit");
         }
-
-        /* if (enemyHit && weaponSelected.selectedWeapon == 1 && tesla.cooldown <= 0)
-        {
-            AttackEnemy(teslaDamage);
-            playerMotor.enemyHit = true;
-            Debug.Log("Tesla Hit");
-        } */
     }
 
     private void ChasePlayer()
@@ -138,6 +133,11 @@ public class RobotMotion : MonoBehaviour
 
         if (currentHealth <= 0 && tag == "Enemy")
         {
+            int rng = Random.Range(0, 100);
+            if(rng <= 1)
+            {
+                Instantiate(teslaPowerup, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+            }
             Destroy(gameObject);
             tesla.myList.Clear();
         }

@@ -172,8 +172,11 @@ public class playerMotor : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        player.transform.position = bossPoint.transform.position;
-        bossClass.SetPlayerInBossArena(true);
+        if (other.tag == "CasinoTeleport")
+        {
+            player.transform.position = bossPoint.transform.position;
+            bossClass.SetPlayerInBossArena(true);
+        }
     }
 
     public void SetBossDead(bool death)
