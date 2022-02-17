@@ -35,7 +35,11 @@ public class RobotMotion : MonoBehaviour
 
     public WeaponSwaper weaponSelected;
 
+    public GameObject[] powerupArray;
+    
     public GameObject teslaPowerup;
+    public GameObject maxAmmoPowerup;
+    public GameObject healthBoostPowerup;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -134,9 +138,10 @@ public class RobotMotion : MonoBehaviour
         if (currentHealth <= 0 && tag == "Enemy")
         {
             int rng = Random.Range(0, 100);
-            if(rng <= 1)
+            if(rng <= 50)
             {
-                Instantiate(teslaPowerup, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+                GameObject randDrop = powerupArray[Random.Range(0, powerupArray.Length)];
+                Instantiate(randDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
             }
             Destroy(gameObject);
             tesla.myList.Clear();

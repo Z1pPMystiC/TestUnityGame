@@ -42,6 +42,7 @@ public class WaveSpawner : MonoBehaviour
     public TextMeshProUGUI centerText;
 
     public FloppyLauncherScript floppyLauncher;
+    public RaycastGun tesla;
 
 
     public SpawnState state = SpawnState.COUNTING;
@@ -95,6 +96,7 @@ public class WaveSpawner : MonoBehaviour
             thirdDone = false;
             twoThirdsDone = false;
             floppyLauncher.ammoLeft = floppyLauncher.fullAmmo;
+            tesla.ammoLeft = tesla.fullAmmo;
             centerText.SetText("Max Ammo.\nAmmo has been replenished");
             Invoke("ClearText", 2f);
         }
@@ -104,6 +106,7 @@ public class WaveSpawner : MonoBehaviour
             allWavesDone = false;
             Destroy(casinoBlocker);
             floppyLauncher.ammoLeft = floppyLauncher.fullAmmo;
+            tesla.ammoLeft = tesla.fullAmmo;
             centerText.SetText("The Casino Has Opened.");
             Invoke("ClearText", 2f);
         }

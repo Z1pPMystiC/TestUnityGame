@@ -8,6 +8,7 @@ public class PickupWeapon : MonoBehaviour
 
     public WeaponSwaper weaponSwaper;
     public TextMeshProUGUI centerText;
+    public RaycastGun tesla;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +25,20 @@ public class PickupWeapon : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player") {
-            weaponSwaper.teslaEnabled = true;
-            centerText.SetText("New Weapon Unlocked: Tesla Coil!");
-            Invoke("ClearText", 2f);
-            gameObject.SetActive(false);
+            if(weaponSwaper.teslaEnabled)
+            {
+                tesla.ammoLeft = tesla.fullAmmo;
+                centerText.SetText("Ammo Replenished");
+                Invoke("ClearText", 2f);
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                weaponSwaper.teslaEnabled = true;
+                centerText.SetText("New Weapon Unlocked: Tesla Coil!");
+                Invoke("ClearText", 2f);
+                gameObject.SetActive(false);
+            }
         }
     }
 
