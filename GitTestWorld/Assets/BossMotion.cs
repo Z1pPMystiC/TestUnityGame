@@ -26,7 +26,7 @@ public class BossMotion : MonoBehaviour
 
     public float damageDelay;
 
-    public int projectileDamage;
+    public int floppyDamage, teslaDamage;
 
     public Slider bossHealth;
     public TextMeshProUGUI bossNameText;
@@ -37,6 +37,10 @@ public class BossMotion : MonoBehaviour
     public bool playerInBossArena = false;
 
     public bool enemyHit = false;
+
+    public RaycastGun tesla;
+
+    public WeaponSwaper weaponSelected;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -83,9 +87,9 @@ public class BossMotion : MonoBehaviour
             bossHealthText.SetText(currentHealth + " / " + maxHealth + " HP");
         }
 
-        if (enemyHit)
+        if (enemyHit && weaponSelected.selectedWeapon == 0)
         {
-            AttackEnemy(projectileDamage);
+            AttackEnemy(floppyDamage);
             playerMotor.enemyHit = true;
         }
     }
@@ -146,21 +150,24 @@ public class BossMotion : MonoBehaviour
             currentHealth = 0;
             playerMotor.SetBossDead(true);
             Destroy(gameObject);
+            tesla.myList.Clear();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         enemyHit = true;
+        Invoke("ClearHit", 0.05f);
     }
 
-    private void OnTriggerExit(Collider other)
+    /*private void OnTriggerExit(Collider other)
+    {
+
+    }*/
+
+    private void ClearHit()
     {
         enemyHit = false;
-    }
-
-    public void TakeDamage() {
-        healthBar.TakeDamage(damageToPlayer);
     }
 
     public void SetPlayerInBossArena(bool boolean) {

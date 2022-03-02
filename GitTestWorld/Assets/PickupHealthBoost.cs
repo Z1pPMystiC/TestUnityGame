@@ -7,12 +7,13 @@ public class PickupHealthBoost : MonoBehaviour
 {
     public TextMeshProUGUI centerText;
     public HealthBarScript healthBar;
+    public Transform floppyDisk;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame

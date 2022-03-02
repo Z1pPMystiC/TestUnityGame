@@ -12,7 +12,6 @@ public class DespawnScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        
         Destroy(gameObject);
     }
 }

@@ -75,10 +75,16 @@ public class RaycastGun : MonoBehaviour
                 {
                     if (gameobject != null)
                     {
-                        if (gameobject.tag == "Enemy" || gameobject.tag == "Boss")
+                        if (gameobject.tag == "Enemy")
                         {
                             var robot = gameobject.GetComponent<RobotMotion>();
                             robot.AttackEnemy(robot.teslaDamage);
+                            playerMotor.enemyHit = true;
+                        }
+                        if (gameobject.tag == "Boss")
+                        {
+                            var boss = gameobject.GetComponent<BossMotion>();
+                            boss.AttackEnemy(boss.teslaDamage);
                             playerMotor.enemyHit = true;
                         }
                     }

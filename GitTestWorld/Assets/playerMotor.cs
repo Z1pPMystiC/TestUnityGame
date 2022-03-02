@@ -150,13 +150,19 @@ public class playerMotor : MonoBehaviour
 
         Vector3 MoveVector = transform.TransformDirection(PlayerMovementInput) * Speed;
         PlayerBody.velocity = new Vector3(MoveVector.x, PlayerBody.velocity.y, MoveVector.z);
-      
-
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (Physics.CheckSphere(FeetTransform.position, 0.1f, FloorMask)) 
             {
                 PlayerBody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            }
+        }
+        else
+        {
+            if (Physics.CheckSphere(FeetTransform.position, 0.1f, FloorMask))
+            {
+                PlayerBody.velocity = Vector3.ClampMagnitude(PlayerBody.velocity, Speed);
             }
         }
 
