@@ -138,7 +138,7 @@ public class RobotMotion : MonoBehaviour
         if (currentHealth <= 0 && tag == "Enemy")
         {
             int rng = Random.Range(0, 100);
-            if(rng <= 50)
+            if(rng <= 20)
             {
                 GameObject randDrop = powerupArray[Random.Range(0, powerupArray.Length)];
                 Instantiate(randDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);

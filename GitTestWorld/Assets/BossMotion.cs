@@ -118,11 +118,11 @@ public class BossMotion : MonoBehaviour
             Invoke("TakeDamage", damageDelay);
 
             alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            Invoke("ResetAttack", timeBetweenAttacks);
         }
     }
 
-    private void ResetAttack()
+    public void ResetAttack()
     {
         alreadyAttacked = false;
     }
@@ -160,11 +160,6 @@ public class BossMotion : MonoBehaviour
         Invoke("ClearHit", 0.05f);
     }
 
-    /*private void OnTriggerExit(Collider other)
-    {
-
-    }*/
-
     private void ClearHit()
     {
         enemyHit = false;
@@ -172,6 +167,11 @@ public class BossMotion : MonoBehaviour
 
     public void SetPlayerInBossArena(bool boolean) {
         playerInBossArena = boolean;
+    }
+
+    public void TakeDamage()
+    {
+        healthBar.TakeDamage(damageToPlayer);
     }
 
 }

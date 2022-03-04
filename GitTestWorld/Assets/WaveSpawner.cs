@@ -91,16 +91,6 @@ public class WaveSpawner : MonoBehaviour
             Invoke("ClearText", 2f);
         }
 
-        if(thirdDone || twoThirdsDone)
-        {
-            thirdDone = false;
-            twoThirdsDone = false;
-            floppyLauncher.ammoLeft = floppyLauncher.fullAmmo;
-            tesla.ammoLeft = tesla.fullAmmo;
-            centerText.SetText("Max Ammo.\nAmmo has been replenished");
-            Invoke("ClearText", 2f);
-        }
-
         if(allWavesDone)
         {
             allWavesDone = false;
@@ -124,16 +114,6 @@ public class WaveSpawner : MonoBehaviour
         if(nextWave == 2)
         {
             firstStageDone = true;
-        }
-
-        if (nextWave == 4)
-        {
-            thirdDone = true;
-        }
-
-        if (nextWave == 7)
-        {
-            twoThirdsDone = true;
         }
 
         if (nextWave + 1 > waves.Length - 1)

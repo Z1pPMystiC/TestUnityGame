@@ -7,7 +7,7 @@ public class PickupHealthBoost : MonoBehaviour
 {
     public TextMeshProUGUI centerText;
     public HealthBarScript healthBar;
-    public Transform floppyDisk;
+    public float healthBoost;
 
 
     // Start is called before the first frame update
@@ -26,15 +26,15 @@ public class PickupHealthBoost : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if(healthBar.slider.value + 25 > 100)
+            if(healthBar.slider.value + healthBoost > healthBar.slider.maxValue)
             {
                 healthBar.slider.value = healthBar.slider.maxValue;
             }
             else
             {
-                healthBar.slider.value += 25;
+                healthBar.slider.value += healthBoost;
             }
-            centerText.SetText("Health Boost!\n+25 Health");
+            centerText.SetText("Health Boost!\n+" + healthBoost + " Health");
             Invoke("ClearText", 2f);
             gameObject.SetActive(false);
         }
