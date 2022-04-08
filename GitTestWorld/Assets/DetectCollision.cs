@@ -8,7 +8,7 @@ public class DetectCollision : MonoBehaviour
     public GameObject player;
     private void Start()
     {
-        Physics.IgnoreCollision(player.GetComponent<CapsuleCollider>(), GetComponent<SphereCollider>());
+    
     }
 
     private void OnTriggerEnter(Collider other)

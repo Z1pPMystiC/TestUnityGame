@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Menu.unity
     guid: 4df67ad856277f947aadddf678b0bea2
   - enabled: 1
-    path: Assets/GitTestWorld.unity
+    path: Assets/CityMap.unity
     guid: d635aebc939985e4ea3added869abf95
+  - enabled: 1
+    path: Assets/IndoorMap.unity
+    guid: a7a69729e3465634fae1a1dbc6c0836d
   m_configObjects: {}

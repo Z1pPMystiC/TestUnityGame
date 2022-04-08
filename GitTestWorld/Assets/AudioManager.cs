@@ -1,11 +1,15 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-    
+    public Slider volumeSlider;
+    public TextMeshProUGUI volumeText;
+
     // Start is called before the first frame update
     void Awake ()
     {
@@ -17,6 +21,12 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.time = s.time;
+        }
+
+        if(!PlayerPrefs.HasKey("musicVolume"))
+        {
+            PlayerPrefs.SetFloat("musicVolume", 1);
+            Load();
         }
     }
 
@@ -30,5 +40,22 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Stop();
+    }
+
+    public void ChangeVolume()
+    {
+        AudioListener.volume = volumeSlider.value;
+        volumeText.SetText("" + Math.Round(volumeSlider.value * 100));
+        Save();
+    }
+
+    private void Load()
+    {
+        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+    }
+
+    private void Save()
+    {
+        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
     }
 }

@@ -20,8 +20,8 @@ public class playerMotor : MonoBehaviour
     [SerializeField] private Transform FeetTransform;
     [SerializeField] private Transform PlayerCamera;
     [SerializeField] private Rigidbody PlayerBody;
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float sprintSpeed;
+    [SerializeField] public float walkSpeed;
+    [SerializeField] public float sprintSpeed;
     [SerializeField] private float Sensitivity;
     [SerializeField] private float JumpForce;
     [SerializeField] private float attackDelay;

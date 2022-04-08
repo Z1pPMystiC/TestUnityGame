@@ -5,14 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public PauseMenu pauseMenu;
+    public GameObject mainMenuUI;
+    public GameObject mapSelectionUI;
+    // public GameObject settingsUI;
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        mainMenuUI.SetActive(false);
+        mapSelectionUI.SetActive(true);
+        // settingsUI.SetActive(false);
+
+        /*SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Time.timeScale = 1f;
         pauseMenu.gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = false;*/
     }
 
     public void QuitGame()

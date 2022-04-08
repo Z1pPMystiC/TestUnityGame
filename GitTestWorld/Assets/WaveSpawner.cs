@@ -49,6 +49,15 @@ public class WaveSpawner : MonoBehaviour
     private void Start()
     {
         waveCountdown = timeBetweenWaves;
+        /*for (int i = 0; i < 100; i++)
+        {
+            if (waves[i] != null)
+            {
+                waves[i].name = "Round " + (i + 1);
+                waves[i].count = i + 2;
+                waves[i].currentHealth = 100 + (i * 50);
+            }
+        }*/
     }
 
     private void Update()
