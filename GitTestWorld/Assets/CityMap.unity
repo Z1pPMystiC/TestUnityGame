@@ -92500,7 +92500,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5665836343399667789, guid: c9a5fca622d72394b87648205be68e96, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c9a5fca622d72394b87648205be68e96, type: 3}
 --- !u!1001 &2535679088044712601
 PrefabInstance:
@@ -92825,7 +92826,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2535679089208742837, guid: 13ed7f0442d64c049ab8b42d902c6ecb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 13ed7f0442d64c049ab8b42d902c6ecb, type: 3}
 --- !u!1 &2548757482671213713
 GameObject:
@@ -93349,7 +93351,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4233918636326413887, guid: b87a5f69d72b7474b9c8d5beeabe3c1c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b87a5f69d72b7474b9c8d5beeabe3c1c, type: 3}
 --- !u!137 &4506449927828511550
 SkinnedMeshRenderer:

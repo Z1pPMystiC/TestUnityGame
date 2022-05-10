@@ -151,10 +151,6 @@ public class RobotMotion : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         enemyHit = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
         Invoke("ClearHit", 0.05f);
     }
 

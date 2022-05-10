@@ -60,6 +60,7 @@ public class RaycastGun : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("EmptyMag");
                 Invoke("StopEmpty", 0.5f);
                 laserLine.enabled = false;
+                particles.SetActive(false);
                 laserEnd.transform.position = new Vector3(0, 0, 0);
                 myList.Clear();
             }
@@ -101,6 +102,7 @@ public class RaycastGun : MonoBehaviour
     private void Reload()
     {
         laserLine.enabled = false;
+        particles.SetActive(false);
         laserEnd.transform.position = new Vector3(0, 0, 0);
         myList.Clear();
         reloading = true;
@@ -121,6 +123,11 @@ public class RaycastGun : MonoBehaviour
             bulletsLeft = magazineSize;
         }
         reloading = false;
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            laserLine.enabled = true;
+            particles.SetActive(true);
+        }
     }
 
     IEnumerator ShootLaser()

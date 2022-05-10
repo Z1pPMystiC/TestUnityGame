@@ -14,6 +14,7 @@ public class DetectCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         teslaCoil.myList.Add(other.gameObject);
+        Debug.Log("Hit");
     }
 
     private void OnTriggerExit(Collider other) 

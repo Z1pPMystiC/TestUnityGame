@@ -14,6 +14,7 @@ public class MapSelection : MonoBehaviour
         //pauseMenu.gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        WhatMapIsSelected.isIndoorMap = false;
     }
 
     public void SelectIndoor()
@@ -23,5 +24,6 @@ public class MapSelection : MonoBehaviour
         //pauseMenu.gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        WhatMapIsSelected.isIndoorMap = true;
     }
 }

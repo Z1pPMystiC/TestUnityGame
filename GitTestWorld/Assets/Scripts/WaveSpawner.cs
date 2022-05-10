@@ -26,17 +26,20 @@ public class WaveSpawner : MonoBehaviour
 
     private float searchCountdown = 1f;
 
-    
+    public bool isIndoorMap = true;
 
     [SerializeField] public HealthBarScript healthBar;
     [SerializeField] public RobotMotion robot;
 
     public bool firstStageDone = false;
-    public GameObject parkBlocker;
+    public GameObject stageBlocker;
     public bool thirdDone = false;
     public bool twoThirdsDone = false;
     public bool allWavesDone = false;
-    public GameObject casinoBlocker;
+    public GameObject bossBlocker;
+    public string firstStageText;
+    public string allWavesDoneText;
+    public BossMotion bossMotion;
 
     public TextMeshProUGUI waveCounter;
     public TextMeshProUGUI centerText;
@@ -95,19 +98,23 @@ public class WaveSpawner : MonoBehaviour
         if(firstStageDone)
         {
             firstStageDone = false;
-            Destroy(parkBlocker);
-            centerText.SetText("The Park Gates Have Opened.");
+            Destroy(stageBlocker);
+            centerText.SetText(firstStageText);
             Invoke("ClearText", 2f);
         }
 
         if(allWavesDone)
         {
             allWavesDone = false;
-            Destroy(casinoBlocker);
+            Destroy(bossBlocker);
             floppyLauncher.ammoLeft = floppyLauncher.fullAmmo;
             tesla.ammoLeft = tesla.fullAmmo;
-            centerText.SetText("The Casino Has Opened.");
+            centerText.SetText(allWavesDoneText);
             Invoke("ClearText", 2f);
+            if (WhatMapIsSelected.isIndoorMap)
+            {
+                bossMotion.playerInBossArena = true;
+            }
         }
 
         waveCounter.SetText("Wave: " + (nextWave + 1));

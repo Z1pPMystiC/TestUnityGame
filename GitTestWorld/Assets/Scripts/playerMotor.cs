@@ -41,6 +41,11 @@ public class playerMotor : MonoBehaviour
     public Camera camera;
     public PauseMenu pauseMenu;
 
+    public TextMeshProUGUI keyCountText;
+    public int keysPickedUp = 0;
+    public int keysRequired = 3;
+    public bool keyFound = false;
+
     // Update is called once per frame
 
     private void Start()
@@ -134,6 +139,11 @@ public class playerMotor : MonoBehaviour
             waveClass.state = WaveSpawner.SpawnState.COUNTING;
             FindObjectOfType<AudioManager>().Play("PlayerDeath");
             Invoke("Restart", 3f);
+        }
+
+        if(keyFound)
+        {
+            keyCountText.SetText("Keys Found: " + keysPickedUp + " / " + keysRequired);
         }
     }
 
