@@ -45,6 +45,7 @@ public class playerMotor : MonoBehaviour
     public int keysPickedUp = 0;
     public int keysRequired = 3;
     public bool keyFound = false;
+    public GameObject keyGate;
 
     // Update is called once per frame
 
@@ -143,7 +144,15 @@ public class playerMotor : MonoBehaviour
 
         if(keyFound)
         {
-            keyCountText.SetText("Keys Found: " + keysPickedUp + " / " + keysRequired);
+            if(keysPickedUp < keysRequired)
+            {
+                keyCountText.SetText("Keys Found: " + keysPickedUp + " / " + keysRequired);
+            }
+            if(keysPickedUp == keysRequired)
+            {
+                Destroy(keyGate);
+                keyCountText.SetText("All keys found!/nA passage has opened...");
+            }
         }
     }
 

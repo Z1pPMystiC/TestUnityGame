@@ -30,7 +30,7 @@ public class PickupKeyScript : MonoBehaviour
                 player.keyFound = true;
             }
             player.keysPickedUp++;
-            centerText.SetText("Key found! Keys left to find: " + (player.keysRequired - player.keysPickedUp));
+            centerText.SetText("Key found!");
             Invoke("ClearText", 2f);
             gameObject.SetActive(false);
         }
