@@ -53,7 +53,7 @@ public class playerMotor : MonoBehaviour
     {
         attackDelayCurrent = attackDelay;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
+        Cursor.visible = false;
         player.transform.position = respawnPoint.transform.position;
         Transform camTransform = camera.GetComponent<Transform>();
         float xRot = Mathf.Clamp(camTransform.eulerAngles.x, -5f, 5f);
@@ -151,7 +151,7 @@ public class playerMotor : MonoBehaviour
             if(keysPickedUp == keysRequired)
             {
                 Destroy(keyGate);
-                keyCountText.SetText("All keys found!/nA passage has opened...");
+                keyCountText.SetText("All keys found!\nA passage has opened...");
             }
         }
     }

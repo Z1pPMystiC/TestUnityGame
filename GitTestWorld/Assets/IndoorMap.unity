@@ -31972,7 +31972,7 @@ MonoBehaviour:
     enemies:
     - {fileID: 1646305450}
     count: 2
-    rate: 10
+    rate: 1
     currentHealth: 50
     spawnPoints:
     - {fileID: 1176159640}
@@ -31994,7 +31994,7 @@ MonoBehaviour:
     - {fileID: 1373643412}
     count: 5
     rate: 1
-    currentHealth: 200
+    currentHealth: 100
     spawnPoints:
     - {fileID: 1176159640}
     - {fileID: 1305830108}
@@ -32003,9 +32003,9 @@ MonoBehaviour:
     - {fileID: 1646305450}
     - {fileID: 530980338}
     - {fileID: 1373643412}
-    count: 8
+    count: 6
     rate: 1
-    currentHealth: 300
+    currentHealth: 150
     spawnPoints:
     - {fileID: 1176159640}
     - {fileID: 1305830108}
@@ -32016,7 +32016,7 @@ MonoBehaviour:
     - {fileID: 1373643412}
     count: 8
     rate: 1
-    currentHealth: 300
+    currentHealth: 150
     spawnPoints:
     - {fileID: 1176159640}
     - {fileID: 1305830108}
@@ -32025,9 +32025,9 @@ MonoBehaviour:
     - {fileID: 1646305450}
     - {fileID: 530980338}
     - {fileID: 1373643412}
-    count: 8
+    count: 10
     rate: 1
-    currentHealth: 300
+    currentHealth: 150
     spawnPoints:
     - {fileID: 1176159640}
     - {fileID: 1305830108}
@@ -32038,7 +32038,7 @@ MonoBehaviour:
     - {fileID: 1373643412}
     count: 10
     rate: 1
-    currentHealth: 300
+    currentHealth: 200
     spawnPoints:
     - {fileID: 1176159640}
     - {fileID: 1305830108}
@@ -32049,7 +32049,7 @@ MonoBehaviour:
     - {fileID: 1373643412}
     count: 10
     rate: 1
-    currentHealth: 400
+    currentHealth: 300
     spawnPoints:
     - {fileID: 1176159640}
     - {fileID: 1305830108}
@@ -32060,7 +32060,7 @@ MonoBehaviour:
     - {fileID: 1373643412}
     count: 5
     rate: 1
-    currentHealth: 500
+    currentHealth: 400
     spawnPoints:
     - {fileID: 1176159640}
     - {fileID: 1305830108}
@@ -32071,7 +32071,7 @@ MonoBehaviour:
     - {fileID: 1373643412}
     count: 10
     rate: 1
-    currentHealth: 500
+    currentHealth: 400
     spawnPoints:
     - {fileID: 1176159640}
     - {fileID: 1305830108}
@@ -32116,8 +32116,8 @@ MonoBehaviour:
   FeetTransform: {fileID: 220520358}
   PlayerCamera: {fileID: 388292102}
   PlayerBody: {fileID: 923202806}
-  walkSpeed: 8
-  sprintSpeed: 10
+  walkSpeed: 7
+  sprintSpeed: 9
   Sensitivity: 3
   JumpForce: 12
   attackDelay: 0.5
@@ -63395,7 +63395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "All keys found! \nA passage has opened..."
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
