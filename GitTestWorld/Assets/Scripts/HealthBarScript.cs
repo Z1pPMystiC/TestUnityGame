@@ -24,6 +24,14 @@ public class HealthBarScript : MonoBehaviour
             respawnCountdown = 1f;
             isDead = false;
         }
+
+        if (slider.value <= 0)
+        {
+            isDead = true;
+            SetMaxHealth(100);
+            RespawnPlayer();
+            playerMotor.playerDead = true;
+        }
     }
     public void SetMaxHealth(int health)
     {
@@ -49,14 +57,6 @@ public class HealthBarScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         slider.value -= damage;
-
-        if (slider.value <= 0)
-        {
-            isDead = true;
-            SetMaxHealth(100);
-            RespawnPlayer();
-            playerMotor.playerDead = true;
-        }
     }
 
     public void RespawnPlayer()
